@@ -11,11 +11,7 @@ import java.awt.event.*;
  * @email jinshengcong@163.com
  */
 public class TankFrame extends Frame {
-    private int x = 200, y = 200;
-    // 初始方向
-    Dir dir = Dir.RIGHT;
-    // 速度
-    private final static int SPEED = 10;
+    Tank myTank = new Tank(200, 200, Dir.DOWN);
 
     public TankFrame() {
         this.setTitle("Tank War");
@@ -74,27 +70,7 @@ public class TankFrame extends Frame {
      */
     @Override
     public void paint(Graphics g) {
-        // 画一个方块
-        g.fillRect(x, y, 80, 80);
-        switch (dir) {
-            case UP:
-                y -= SPEED;
-                break;
-            case DOWN:
-                y += SPEED;
-                break;
-            case LEFT:
-                x -= SPEED;
-                break;
-            case RIGHT:
-                x += SPEED;
-                break;
-            default:
-                break;
-        }
-        // repaint();
-        // x += 10;
-
+        myTank.paint(g);
     }
 
     private class MyKeyListener extends KeyAdapter {
@@ -152,10 +128,10 @@ public class TankFrame extends Frame {
         }
 
         private void setMainTankDir() {
-            if (bU) dir = Dir.UP;
-            if (bD) dir = Dir.DOWN;
-            if (bL) dir = Dir.LEFT;
-            if (bR) dir = Dir.RIGHT;
+            if (bU) myTank.setDir(Dir.UP);
+            if (bD) myTank.setDir(Dir.DOWN);
+            if (bL) myTank.setDir(Dir.LEFT);
+            if (bR) myTank.setDir(Dir.RIGHT);
         }
     }
 }
