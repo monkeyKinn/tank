@@ -73,12 +73,35 @@ public class TankFrame extends Frame {
         System.out.println(x + "," + y);
         // 画一个方块
         g.fillRect(x, y, 80, 80);
-        x += 10;
+        // x += 10;
     }
 
     private class MyKeyListener extends KeyAdapter {
+        private boolean bU = false;
+        private boolean bD = false;
+        private boolean bL = false;
+        private boolean bR = false;
+
         @Override
         public void keyPressed(KeyEvent e) {
+            // 按下什么键
+            int keyCode = e.getKeyCode();
+            switch (keyCode) {
+                case KeyEvent.VK_UP:
+                    bU = true;
+                    break;
+                case KeyEvent.VK_DOWN:
+                    bD = true;
+                    break;
+                case KeyEvent.VK_LEFT:
+                    bL = true;
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    bR = true;
+                    break;
+                default:
+                    break;
+            }
             // x += 200;
             // 重画 会默认调用paint
             repaint();
@@ -86,7 +109,24 @@ public class TankFrame extends Frame {
 
         @Override
         public void keyReleased(KeyEvent e) {
-            System.out.println("释放");
+            // 按下什么键
+            int keyCode = e.getKeyCode();
+            switch (keyCode) {
+                case KeyEvent.VK_UP:
+                    bU = true;
+                    break;
+                case KeyEvent.VK_DOWN:
+                    bD = true;
+                    break;
+                case KeyEvent.VK_LEFT:
+                    bL = true;
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    bR = true;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
