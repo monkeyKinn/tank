@@ -12,6 +12,10 @@ import java.awt.event.*;
  */
 public class TankFrame extends Frame {
     private int x = 200, y = 200;
+    // 初始方向
+    Dir dir = Dir.RIGHT;
+    // 速度
+    private final static int SPEED = 10;
 
     public TankFrame() {
         this.setTitle("Tank War");
@@ -59,7 +63,7 @@ public class TankFrame extends Frame {
     }
 
     /**
-     * 画的方法,有动画,每次最小化后调用
+     * 画的方法,有动画,每次最小化后调用,repaint方法也会调用
      *
      * @param g 画笔
      * @return void
@@ -70,10 +74,27 @@ public class TankFrame extends Frame {
      */
     @Override
     public void paint(Graphics g) {
-        System.out.println(x + "," + y);
         // 画一个方块
         g.fillRect(x, y, 80, 80);
+        switch (dir) {
+            case UP:
+                y -= SPEED;
+                break;
+            case DOWN:
+                y += SPEED;
+                break;
+            case LEFT:
+                x -= SPEED;
+                break;
+            case RIGHT:
+                x += SPEED;
+                break;
+            default:
+                break;
+        }
+        // repaint();
         // x += 10;
+
     }
 
     private class MyKeyListener extends KeyAdapter {
@@ -104,6 +125,7 @@ public class TankFrame extends Frame {
             }
             // x += 200;
             // 重画 会默认调用paint
+            setMainTankDir();
         }
 
         @Override
@@ -126,6 +148,14 @@ public class TankFrame extends Frame {
                 default:
                     break;
             }
+            setMainTankDir();
+        }
+
+        private void setMainTankDir() {
+            if (bU) dir = Dir.UP;
+            if (bD) dir = Dir.DOWN;
+            if (bL) dir = Dir.LEFT;
+            if (bR) dir = Dir.RIGHT;
         }
     }
 }
