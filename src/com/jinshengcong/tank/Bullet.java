@@ -9,24 +9,17 @@ import java.awt.*;
  * @version v1.0
  * @email jinshengcong@163.com
  */
-public class Tank {
-    private int x, y;
-    // 初始方向
-    private Dir dir = Dir.RIGHT;
+public class Bullet {
     // 速度
-    private final static int SPEED = 5;
-    // 停止
-    private boolean moving = false;
+    private static final int SPEED = 10;
+    // 大小
+    private static final int WIDTH = 5, HEIGHT = 5;
+    // 坐标
+    private int x, y;
+    // 方向
+    private Dir dir;
 
-    public boolean isMoving() {
-        return moving;
-    }
-
-    public void setMoving(boolean moving) {
-        this.moving = moving;
-    }
-
-    public Tank(int x, int y, Dir dir) {
+    public Bullet(int x, int y, Dir dir) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -41,16 +34,15 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
-        // 画一个方块
-        g.fillRect(x, y, 80, 80);
+        // 画一个子弹
+        Color color = g.getColor();
+        g.setColor(Color.RED);
+        g.fillOval(x, y, WIDTH, HEIGHT);
+        g.setColor(color);
         move();
-
     }
 
     private void move() {
-        // 没有移动
-        if(!moving) return;
-
         switch (dir) {
             case UP:
                 y -= SPEED;
