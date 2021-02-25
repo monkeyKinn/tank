@@ -12,7 +12,11 @@ import java.awt.event.WindowListener;
  * @email jinshengcong@163.com
  */
 public class T {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
         TankFrame tf = new TankFrame();
+        while (true) {
+            Thread.sleep(50);
+            tf.repaint();
+        }
     }
 }

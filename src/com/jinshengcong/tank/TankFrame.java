@@ -70,18 +70,18 @@ public class TankFrame extends Frame {
      */
     @Override
     public void paint(Graphics g) {
-        System.out.println(x+","+y);
+        System.out.println(x + "," + y);
+        // 画一个方块
         g.fillRect(x, y, 80, 80);
-
-        this.x += 10;
-        this.y += 10;
-
+        x += 10;
     }
 
     private class MyKeyListener extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent e) {
-            System.out.println("按下");
+            // x += 200;
+            // 重画 会默认调用paint
+            repaint();
         }
 
         @Override
