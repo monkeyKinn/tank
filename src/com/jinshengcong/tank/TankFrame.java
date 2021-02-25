@@ -12,9 +12,11 @@ import java.awt.event.WindowListener;
  * @email jinshengcong@163.com
  */
 public class TankFrame extends Frame {
+    private int x = 200, y = 200;
+
     public TankFrame() {
         this.setTitle("Tank War");
-        this.setSize(800,500);
+        this.setSize(800, 500);
         this.setVisible(true);
         this.addWindowListener(new WindowListener() {
             @Override
@@ -54,8 +56,23 @@ public class TankFrame extends Frame {
         });
     }
 
+    /**
+     * 画的方法,有动画,每次最小化后调用
+     *
+     * @param g 画笔
+     * @return void
+     * @author 金聖聰
+     * @email jinshengcong@163.com
+     * @version v1.0
+     * @date 2021/02/25 21:01
+     */
     @Override
     public void paint(Graphics g) {
-        g.fillRect(200,200,80,80);
+        System.out.println(x+","+y);
+        g.fillRect(x, y, 80, 80);
+
+        this.x += 10;
+        this.y += 10;
+
     }
 }
