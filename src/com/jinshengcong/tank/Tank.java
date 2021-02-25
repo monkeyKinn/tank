@@ -12,9 +12,19 @@ import java.awt.*;
 public class Tank {
     private int x, y;
     // 初始方向
-    Dir dir = Dir.RIGHT;
+    private Dir dir = Dir.RIGHT;
     // 速度
     private final static int SPEED = 10;
+    // 停止
+    private boolean moving = false;
+
+    public boolean isMoving() {
+        return moving;
+    }
+
+    public void setMoving(boolean moving) {
+        this.moving = moving;
+    }
 
     public Tank(int x, int y, Dir dir) {
         this.x = x;
@@ -33,6 +43,14 @@ public class Tank {
     public void paint(Graphics g) {
         // 画一个方块
         g.fillRect(x, y, 80, 80);
+        move();
+
+    }
+
+    private void move() {
+        // 没有移动
+        if(!moving) return;
+
         switch (dir) {
             case UP:
                 y -= SPEED;
