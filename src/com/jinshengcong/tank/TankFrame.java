@@ -104,7 +104,6 @@ public class TankFrame extends Frame {
             }
             // x += 200;
             // 重画 会默认调用paint
-            repaint();
         }
 
         @Override
@@ -113,16 +112,16 @@ public class TankFrame extends Frame {
             int keyCode = e.getKeyCode();
             switch (keyCode) {
                 case KeyEvent.VK_UP:
-                    bU = true;
+                    bU = false;
                     break;
                 case KeyEvent.VK_DOWN:
-                    bD = true;
+                    bD = false;
                     break;
                 case KeyEvent.VK_LEFT:
-                    bL = true;
+                    bL = false;
                     break;
                 case KeyEvent.VK_RIGHT:
-                    bR = true;
+                    bR = false;
                     break;
                 default:
                     break;
