@@ -1,8 +1,7 @@
 package com.jinshengcong.tank;
 
 import java.awt.*;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import java.awt.event.*;
 
 /**
  * 之所以要继承,就是为了要重写paint方法(画)
@@ -18,6 +17,9 @@ public class TankFrame extends Frame {
         this.setTitle("Tank War");
         this.setSize(800, 500);
         this.setVisible(true);
+        this.addKeyListener(new MyKeyListener() {
+
+        });
         this.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {
@@ -74,5 +76,17 @@ public class TankFrame extends Frame {
         this.x += 10;
         this.y += 10;
 
+    }
+
+    private class MyKeyListener extends KeyAdapter {
+        @Override
+        public void keyPressed(KeyEvent e) {
+            System.out.println("按下");
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            System.out.println("释放");
+        }
     }
 }
