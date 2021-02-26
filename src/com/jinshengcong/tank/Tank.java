@@ -44,18 +44,28 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
-        Color c = g.getColor();
-        g.setColor(Color.BLUE);
-        // 画一个方块
-        g.fillRect(x, y, 80, 80);
-        g.setColor(c);
+        switch (dir) {
+            case UP:
+                g.drawImage(ResourcesManger.tankU, x, y, null);
+                break;
+            case DOWN:
+                g.drawImage(ResourcesManger.tankD, x, y, null);
+                break;
+            case LEFT:
+                g.drawImage(ResourcesManger.tankL, x, y, null);
+                break;
+            case RIGHT:
+                g.drawImage(ResourcesManger.tankR, x, y, null);
+                break;
+            default:
+                break;
+        }
         move();
-
     }
 
     private void move() {
         // 没有移动
-        if(!moving) return;
+        if (!moving) return;
 
         switch (dir) {
             case UP:
@@ -77,6 +87,6 @@ public class Tank {
 
     // 开火
     public void fire() {
-        tf.bulletList.add(new Bullet(this.x, this.y, this.dir,this.tf));
+        tf.bulletList.add(new Bullet(this.x, this.y, this.dir, this.tf));
     }
 }
