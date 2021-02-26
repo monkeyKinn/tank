@@ -11,7 +11,7 @@ import java.awt.*;
  */
 public class Bullet {
     // 速度
-    private static final int SPEED = 10;
+    private static final int SPEED = 20;
     // 大小
     public static final int WIDTH = ResourcesManger.bulletL.getWidth();
     public static final int HEIGHT = ResourcesManger.bulletL.getHeight();
@@ -117,9 +117,9 @@ public class Bullet {
         // 坦克的矩形
         Rectangle tankRect = new Rectangle(tank.getX(),tank.getY(),Tank.WIDTH,Tank.HEIGHT);
         if (BulRect.intersects(tankRect)) {//相交
+            tf.explodeList.add(new Explode(x,y,tf));
             tank.die();
             this.die();
-            tf.explodeList.add(new Explode(x,y,tf));
         }
     }
 

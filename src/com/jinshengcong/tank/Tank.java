@@ -121,9 +121,25 @@ public class Tank {
             default:
                 break;
         }
-        if (random.nextInt(10) > 5) {
+        if (this.group == Group.BAD && random.nextInt(100) > 95) {
             this.fire();
         }
+        if (this.group == Group.BAD && random.nextInt(100) > 98) {
+            randomDir();
+        }
+    }
+
+    /**
+     * 随机方向
+     *
+     * @return void
+     * @author 金聖聰
+     * @email jinshengcong@163.com
+     * @version v1.0
+     * @date 2021/02/27 2:12
+     */
+    private void randomDir() {
+        this.dir = Dir.values()[random.nextInt(4)];
     }
 
     // 开火

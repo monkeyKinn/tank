@@ -17,7 +17,7 @@ public class Explode {
     private int x, y;
     // 活着的状态
     private TankFrame tf = null;
-
+    // 爆炸图片的数组下标
     private int step = 0;
 
     public Explode(int x, int y, TankFrame tf) {
