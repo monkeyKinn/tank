@@ -12,8 +12,10 @@ import java.io.IOException;
  * @email jinshengcong@163.com
  */
 public class ResourcesManger {
-    public static BufferedImage tankU,tankD,tankL,tankR;
-    public static BufferedImage bulletU,bulletD,bulletL,bulletR;
+    public static BufferedImage tankU, tankD, tankL, tankR;
+    public static BufferedImage bulletU, bulletD, bulletL, bulletR;
+    public static BufferedImage[] explodes = new BufferedImage[16];
+
     static {
         try {
             tankL = ImageIO.read(ResourcesManger.class.getClassLoader().getResourceAsStream("images/tankL.gif"));
@@ -25,6 +27,11 @@ public class ResourcesManger {
             bulletD = ImageIO.read(ResourcesManger.class.getClassLoader().getResourceAsStream("images/bulletD.gif"));
             bulletR = ImageIO.read(ResourcesManger.class.getClassLoader().getResourceAsStream("images/bulletR.gif"));
             bulletU = ImageIO.read(ResourcesManger.class.getClassLoader().getResourceAsStream("images/bulletU.gif"));
+
+            for (int i = 0; i < explodes.length; i++) {
+                explodes[i] = ImageIO.read(ResourcesManger.class.getClassLoader().getResourceAsStream("images/e" + (i + 1) +
+                        ".gif"));
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

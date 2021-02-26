@@ -17,7 +17,7 @@ public class TankFrame extends Frame {
     Tank myTank = new Tank(200, 500, Dir.DOWN, Group.Good, this);
     List<Bullet> bulletList = new ArrayList<>();
     List<Tank> enemyTanksList = new ArrayList<>();
-
+    Explode e = new Explode(100,100,this);
     public TankFrame() {
         this.setTitle("Tank War");
         this.setSize(GAME_WIDTH, GAME_HEIGHT);
@@ -98,20 +98,23 @@ public class TankFrame extends Frame {
         g.drawString("敌方坦克数量: " + enemyTanksList.size(), 10, 80);
         g.setColor(c);
 
-
+        // 画我的坦克
         myTank.paint(g);
         for (int i = 0; i < bulletList.size(); i++) {
             bulletList.get(i).paint(g);
         }
+        // 画敌方坦克
         for (int i = 0; i < enemyTanksList.size(); i++) {
             enemyTanksList.get(i).paint(g);
         }
-
+        // 画子弹
         for (int i = 0; i < bulletList.size(); i++) {
             for (int j = 0; j < enemyTanksList.size(); j++) {
                 bulletList.get(i).collideWith(enemyTanksList.get(j));
             }
         }
+        // 画爆炸
+        e.paint(g);
     }
 
     private class MyKeyListener extends KeyAdapter {
