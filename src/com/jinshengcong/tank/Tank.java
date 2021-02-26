@@ -19,6 +19,8 @@ public class Tank {
     private boolean moving = false;
     // tankFrame对象
     private TankFrame tf = null;
+    //生死状态
+    private boolean live = true;
 
     public static final int WIDTH = ResourcesManger.tankD.getWidth();
     public static final int HEIGHT = ResourcesManger.tankD.getHeight();
@@ -29,6 +31,22 @@ public class Tank {
 
     public void setMoving(boolean moving) {
         this.moving = moving;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
     public Tank(int x, int y, Dir dir, TankFrame tf) {
@@ -47,6 +65,9 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
+        if (!live) {
+            tf.enemyTanksList.remove(this);
+        }
         switch (dir) {
             case UP:
                 g.drawImage(ResourcesManger.tankU, x, y, null);
@@ -93,5 +114,9 @@ public class Tank {
         int bX = this.x + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
         int bY = this.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
         tf.bulletList.add(new Bullet(bX, bY, this.dir, this.tf));
+    }
+
+    public void die() {
+        this.live = false;
     }
 }

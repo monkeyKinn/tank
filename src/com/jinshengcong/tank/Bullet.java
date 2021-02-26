@@ -86,4 +86,28 @@ public class Bullet {
             live = false;
         }
     }
+
+    /**
+     * 撞击
+     * @param tank
+     * @return void
+     * @author 金聖聰
+     * @email jinshengcong@163.com
+     * @version v1.0
+     * @date 2021/02/27 0:09
+     */
+    public void collideWith(Tank tank) {
+        // 子弹本身的矩形
+        Rectangle BulRect = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
+        // 坦克的矩形
+        Rectangle tankRect = new Rectangle(tank.getX(),tank.getY(),Tank.WIDTH,Tank.HEIGHT);
+        if (BulRect.intersects(tankRect)) {//相交
+            tank.die();
+            this.die();
+        }
+    }
+
+    private void die() {
+        this.live = false;
+    }
 }
