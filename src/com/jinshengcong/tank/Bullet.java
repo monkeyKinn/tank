@@ -44,10 +44,22 @@ public class Bullet {
             tf.bulletList.remove(this);
         }
         // 画一个子弹
-        Color color = g.getColor();
-        g.setColor(Color.RED);
-        g.fillOval(x, y, WIDTH, HEIGHT);
-        g.setColor(color);
+        switch (dir) {
+            case UP:
+                g.drawImage(ResourcesManger.bulletU, x, y, null);
+                break;
+            case DOWN:
+                g.drawImage(ResourcesManger.bulletD, x, y, null);
+                break;
+            case LEFT:
+                g.drawImage(ResourcesManger.bulletL, x, y, null);
+                break;
+            case RIGHT:
+                g.drawImage(ResourcesManger.bulletR, x, y, null);
+                break;
+            default:
+                break;
+        }
         move();
     }
 
