@@ -20,6 +20,9 @@ public class Tank {
     // tankFrame对象
     private TankFrame tf = null;
 
+    public static final int WIDTH = ResourcesManger.tankD.getWidth();
+    public static final int HEIGHT = ResourcesManger.tankD.getHeight();
+
     public boolean isMoving() {
         return moving;
     }
@@ -87,6 +90,8 @@ public class Tank {
 
     // 开火
     public void fire() {
-        tf.bulletList.add(new Bullet(this.x, this.y, this.dir, this.tf));
+        int bX = this.x + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
+        int bY = this.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
+        tf.bulletList.add(new Bullet(bX, bY, this.dir, this.tf));
     }
 }

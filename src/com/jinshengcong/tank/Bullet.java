@@ -13,7 +13,8 @@ public class Bullet {
     // 速度
     private static final int SPEED = 10;
     // 大小
-    private static final int WIDTH = 5, HEIGHT = 5;
+    public static final int WIDTH = ResourcesManger.bulletL.getWidth();
+    public static final int HEIGHT = ResourcesManger.bulletL.getHeight();
     // 坐标
     private int x, y;
     // 方向
