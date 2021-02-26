@@ -18,11 +18,15 @@ public class Bullet {
     private int x, y;
     // 方向
     private Dir dir;
+    // 活着的状态
+    private boolean live = true;
+    private TankFrame tf = null;
 
-    public Bullet(int x, int y, Dir dir) {
+    public Bullet(int x, int y, Dir dir, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.tf = tf;
     }
 
     public Dir getDir() {
@@ -34,6 +38,11 @@ public class Bullet {
     }
 
     public void paint(Graphics g) {
+        // 再画子弹时候判断子弹存活情况
+        if (!live) {
+            // 消除子弹
+            tf.bulletList.remove(this);
+        }
         // 画一个子弹
         Color color = g.getColor();
         g.setColor(Color.RED);
@@ -58,6 +67,10 @@ public class Bullet {
                 break;
             default:
                 break;
+        }
+        if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) {
+            // 子弹消失
+            live = false;
         }
     }
 }

@@ -2,6 +2,8 @@ package com.jinshengcong.tank;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 之所以要继承,就是为了要重写paint方法(画)
@@ -11,9 +13,9 @@ import java.awt.event.*;
  * @email jinshengcong@163.com
  */
 public class TankFrame extends Frame {
-    private static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
+    static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
     Tank myTank = new Tank(200, 200, Dir.DOWN,this);
-    Bullet myBullet = new Bullet(300, 300, Dir.DOWN);
+    List<Bullet> bulletList = new ArrayList<>();
 
     public TankFrame() {
         this.setTitle("Tank War");
@@ -88,8 +90,15 @@ public class TankFrame extends Frame {
      */
     @Override
     public void paint(Graphics g) {
+        Color c = g.getColor();
+        g.setColor(Color.CYAN);
+        g.drawString("子弹数量: "+bulletList.size(),10,60);
+        g.setColor(c);
+
         myTank.paint(g);
-        myBullet.paint(g);
+        for (int i = 0; i < bulletList.size(); i++) {
+            bulletList.get(i).paint(g);
+        }
     }
 
     private class MyKeyListener extends KeyAdapter {
