@@ -41,8 +41,11 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
+        Color c = g.getColor();
+        g.setColor(Color.BLUE);
         // 画一个方块
         g.fillRect(x, y, 80, 80);
+        g.setColor(c);
         move();
 
     }

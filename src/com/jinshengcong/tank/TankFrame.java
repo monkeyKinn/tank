@@ -11,11 +11,13 @@ import java.awt.event.*;
  * @email jinshengcong@163.com
  */
 public class TankFrame extends Frame {
+    private static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
     Tank myTank = new Tank(200, 200, Dir.DOWN);
-    Bullet myBullet = new Bullet(300,300,Dir.DOWN);
+    Bullet myBullet = new Bullet(300, 300, Dir.DOWN);
+
     public TankFrame() {
         this.setTitle("Tank War");
-        this.setSize(800, 500);
+        this.setSize(GAME_WIDTH, GAME_HEIGHT);
         this.setVisible(true);
         this.addKeyListener(new MyKeyListener() {
 
@@ -56,6 +58,22 @@ public class TankFrame extends Frame {
 
             }
         });
+    }
+
+    // 闪烁的解决 双缓冲
+    Image offScreenImage = null;
+    @Override
+    public void update(Graphics g) {
+        if (offScreenImage == null) {
+            offScreenImage = this.createImage(GAME_WIDTH, GAME_HEIGHT);
+        }
+        Graphics gOffScreen = offScreenImage.getGraphics();
+        Color color = gOffScreen.getColor();
+        gOffScreen.setColor(Color.BLACK);
+        gOffScreen.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+        gOffScreen.setColor(color);
+        paint(gOffScreen);
+        g.drawImage(offScreenImage, 0, 0, null);
     }
 
     /**
