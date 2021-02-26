@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class TankFrame extends Frame {
     static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
-    Tank myTank = new Tank(200, 500, Dir.DOWN,this);
+    Tank myTank = new Tank(200, 500, Dir.DOWN, Group.Good, this);
     List<Bullet> bulletList = new ArrayList<>();
     List<Tank> enemyTanksList = new ArrayList<>();
 
@@ -65,6 +65,7 @@ public class TankFrame extends Frame {
 
     // 闪烁的解决 双缓冲
     Image offScreenImage = null;
+
     @Override
     public void update(Graphics g) {
         if (offScreenImage == null) {
@@ -93,8 +94,8 @@ public class TankFrame extends Frame {
     public void paint(Graphics g) {
         Color c = g.getColor();
         g.setColor(Color.CYAN);
-        g.drawString("子弹数量: "+bulletList.size(),10,60);
-        g.drawString("敌方坦克数量: "+enemyTanksList.size(),10,80);
+        g.drawString("子弹数量: " + bulletList.size(), 10, 60);
+        g.drawString("敌方坦克数量: " + enemyTanksList.size(), 10, 80);
         g.setColor(c);
 
 
@@ -106,10 +107,10 @@ public class TankFrame extends Frame {
             enemyTanksList.get(i).paint(g);
         }
 
-        for (int i = 0; i <bulletList.size(); i++) {
-         for (int j = 0; j < enemyTanksList.size(); j++) {
-             bulletList.get(i).collideWith(enemyTanksList.get(j));
-         }
+        for (int i = 0; i < bulletList.size(); i++) {
+            for (int j = 0; j < enemyTanksList.size(); j++) {
+                bulletList.get(i).collideWith(enemyTanksList.get(j));
+            }
         }
     }
 

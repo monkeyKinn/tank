@@ -23,11 +23,22 @@ public class Bullet {
     private boolean live = true;
     private TankFrame tf = null;
 
-    public Bullet(int x, int y, Dir dir, TankFrame tf) {
+    private Group group = Group.BAD;
+
+    public Bullet(int x, int y, Dir dir, TankFrame tf,Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.tf = tf;
+        this.group = group;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     public Dir getDir() {
@@ -97,6 +108,10 @@ public class Bullet {
      * @date 2021/02/27 0:09
      */
     public void collideWith(Tank tank) {
+        // 队友伤害忽略
+        if (this.group == tank.getGroup()) return;
+
+        // TODO 用一个rec来记录子弹的位置
         // 子弹本身的矩形
         Rectangle BulRect = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
         // 坦克的矩形

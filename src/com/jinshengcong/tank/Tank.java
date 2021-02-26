@@ -1,6 +1,7 @@
 package com.jinshengcong.tank;
 
 import java.awt.*;
+import java.util.Random;
 
 /**
  * description
@@ -14,16 +15,28 @@ public class Tank {
     // 初始方向
     private Dir dir = Dir.RIGHT;
     // 速度
-    private final static int SPEED = 5;
+    private final static int SPEED = 1;
     // 停止
-    private boolean moving = false;
+    private boolean moving = true;
     // tankFrame对象
     private TankFrame tf = null;
     //生死状态
     private boolean live = true;
 
+    private Group group = Group.BAD;
+
+    private Random random = new Random();
+
     public static final int WIDTH = ResourcesManger.tankD.getWidth();
     public static final int HEIGHT = ResourcesManger.tankD.getHeight();
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
 
     public boolean isMoving() {
         return moving;
@@ -49,11 +62,12 @@ public class Tank {
         this.y = y;
     }
 
-    public Tank(int x, int y, Dir dir, TankFrame tf) {
+    public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.tf = tf;
+        this.group = group;
     }
 
     public Dir getDir() {
@@ -107,13 +121,16 @@ public class Tank {
             default:
                 break;
         }
+        if (random.nextInt(10) > 5) {
+            this.fire();
+        }
     }
 
     // 开火
     public void fire() {
         int bX = this.x + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
         int bY = this.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
-        tf.bulletList.add(new Bullet(bX, bY, this.dir, this.tf));
+        tf.bulletList.add(new Bullet(bX, bY, this.dir, this.tf, this.group));
     }
 
     public void die() {
