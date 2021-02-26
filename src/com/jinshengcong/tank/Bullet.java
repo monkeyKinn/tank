@@ -119,6 +119,7 @@ public class Bullet {
         if (BulRect.intersects(tankRect)) {//相交
             tank.die();
             this.die();
+            tf.explodeList.add(new Explode(x,y,tf));
         }
     }
 

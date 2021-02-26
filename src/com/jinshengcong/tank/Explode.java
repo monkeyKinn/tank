@@ -16,10 +16,10 @@ public class Explode {
     // 坐标
     private int x, y;
     // 活着的状态
-    private boolean live = true;
     private TankFrame tf = null;
 
     private int step = 0;
+
     public Explode(int x, int y, TankFrame tf) {
         this.x = x;
         this.y = y;
@@ -28,9 +28,9 @@ public class Explode {
     }
 
     public void paint(Graphics g) {
-        g.drawImage(ResourcesManger.explodes[step++],x,y,null);
-        if (step>=ResourcesManger.explodes.length) {
-            step = 0;
+        g.drawImage(ResourcesManger.explodes[step++], x, y, null);
+        if (step >= ResourcesManger.explodes.length) {
+            tf.explodeList.remove(this);
         }
     }
 }
