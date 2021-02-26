@@ -12,7 +12,7 @@ import java.awt.event.*;
  */
 public class TankFrame extends Frame {
     private static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
-    Tank myTank = new Tank(200, 200, Dir.DOWN);
+    Tank myTank = new Tank(200, 200, Dir.DOWN,this);
     Bullet myBullet = new Bullet(300, 300, Dir.DOWN);
 
     public TankFrame() {
@@ -125,7 +125,7 @@ public class TankFrame extends Frame {
 
         @Override
         public void keyReleased(KeyEvent e) {
-            // 按下什么键
+            // 抬起什么键
             int keyCode = e.getKeyCode();
             switch (keyCode) {
                 case KeyEvent.VK_UP:
@@ -139,6 +139,10 @@ public class TankFrame extends Frame {
                     break;
                 case KeyEvent.VK_RIGHT:
                     bR = false;
+                    break;
+                case KeyEvent.VK_CONTROL:
+                    // 打子弹
+                    myTank.fire();
                     break;
                 default:
                     break;

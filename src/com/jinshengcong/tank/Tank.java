@@ -17,6 +17,8 @@ public class Tank {
     private final static int SPEED = 5;
     // 停止
     private boolean moving = false;
+    // tankFrame对象
+    private TankFrame tf = null;
 
     public boolean isMoving() {
         return moving;
@@ -26,10 +28,11 @@ public class Tank {
         this.moving = moving;
     }
 
-    public Tank(int x, int y, Dir dir) {
+    public Tank(int x, int y, Dir dir, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.tf = tf;
     }
 
     public Dir getDir() {
@@ -70,5 +73,10 @@ public class Tank {
             default:
                 break;
         }
+    }
+
+    // 开火
+    public void fire() {
+        tf.myBullet = new Bullet(this.x, this.y, this.dir);
     }
 }
