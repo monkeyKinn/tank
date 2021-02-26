@@ -25,7 +25,7 @@ public class Bullet {
 
     private Group group = Group.BAD;
 
-    public Bullet(int x, int y, Dir dir, TankFrame tf,Group group) {
+    public Bullet(int x, int y, Dir dir, TankFrame tf, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -100,6 +100,7 @@ public class Bullet {
 
     /**
      * 撞击
+     *
      * @param tank
      * @return void
      * @author 金聖聰
@@ -115,11 +116,14 @@ public class Bullet {
         // 子弹本身的矩形
         Rectangle BulRect = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
         // 坦克的矩形
-        Rectangle tankRect = new Rectangle(tank.getX(),tank.getY(),Tank.WIDTH,Tank.HEIGHT);
+        Rectangle tankRect = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
         if (BulRect.intersects(tankRect)) {//相交
-            tf.explodeList.add(new Explode(x,y,tf));
             tank.die();
             this.die();
+            int eX = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
+            int eY = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
+
+            tf.explodeList.add(new Explode(eX, eY, tf));
         }
     }
 
