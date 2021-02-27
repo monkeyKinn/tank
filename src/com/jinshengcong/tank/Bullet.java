@@ -24,6 +24,7 @@ public class Bullet {
     private TankFrame tf = null;
 
     private Group group = Group.BAD;
+    Rectangle rect = new Rectangle();
 
     public Bullet(int x, int y, Dir dir, TankFrame tf, Group group) {
         this.x = x;
@@ -31,6 +32,11 @@ public class Bullet {
         this.dir = dir;
         this.tf = tf;
         this.group = group;
+
+        rect.x = x;
+        rect.y = y;
+        rect.width = WIDTH;
+        rect.height = HEIGHT;
     }
 
     public Group getGroup() {
@@ -92,6 +98,10 @@ public class Bullet {
             default:
                 break;
         }
+        // 更新rect 这样矩形就跟着子弹在移动
+        rect.x = this.x;
+        rect.y = this.y;
+
         if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) {
             // 子弹消失
             live = false;
@@ -112,12 +122,9 @@ public class Bullet {
         // 队友伤害忽略
         if (this.group == tank.getGroup()) return;
 
-        // TODO 用一个rec来记录子弹的位置
-        // 子弹本身的矩形
-        Rectangle BulRect = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
-        // 坦克的矩形
-        Rectangle tankRect = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
-        if (BulRect.intersects(tankRect)) {//相交
+        // 用一个rec来记录子弹的位置
+        // 子弹本身的矩形与坦克的矩形相交
+        if (rect.intersects(tank.rect)) {//相交
             tank.die();
             this.die();
             int eX = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;

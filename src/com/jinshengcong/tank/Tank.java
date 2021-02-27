@@ -11,6 +11,7 @@ import java.util.Random;
  * @email jinshengcong@163.com
  */
 public class Tank {
+    Rectangle rect = new Rectangle();;
     private int x, y;
     // 初始方向
     private Dir dir = Dir.RIGHT;
@@ -68,6 +69,11 @@ public class Tank {
         this.dir = dir;
         this.tf = tf;
         this.group = group;
+
+        this.rect.x = x;
+        this.rect.y = y;
+        this.rect.width = WIDTH;
+        this.rect.height = HEIGHT;
     }
 
     public Dir getDir() {
@@ -125,6 +131,8 @@ public class Tank {
             default:
                 break;
         }
+
+
         if (this.group == Group.BAD && random.nextInt(100) > 95) {
             this.fire();
         }
@@ -133,6 +141,10 @@ public class Tank {
         }
         // 做边界检测
         boundsCheck();
+
+        // 更新rect 这样矩形就跟着子弹在移动
+        rect.x = this.x;
+        rect.y = this.y;
     }
 
     /**
