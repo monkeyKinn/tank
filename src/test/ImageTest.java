@@ -1,5 +1,6 @@
 
 
+import com.jinshengcong.tank.PropertyMgr;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -27,5 +28,9 @@ public class ImageTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    @Test
+    public void testReadConfig() {
+        System.out.println(PropertyMgr.getValue("initEnemyTankCount"));
     }
 }
