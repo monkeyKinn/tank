@@ -27,8 +27,8 @@ public class Tank {
 
     private Random random = new Random();
 
-    public static final int WIDTH = ResourcesManger.tankD.getWidth();
-    public static final int HEIGHT = ResourcesManger.tankD.getHeight();
+    public static final int WIDTH = ResourcesManger.goodTankU.getWidth();
+    public static final int HEIGHT = ResourcesManger.goodTankU.getHeight();
 
     public Group getGroup() {
         return group;
@@ -84,16 +84,20 @@ public class Tank {
         }
         switch (dir) {
             case UP:
-                g.drawImage(ResourcesManger.tankU, x, y, null);
+                g.drawImage(this.group == Group.Good ? ResourcesManger.goodTankU : ResourcesManger.badTankU, x, y,
+                        null);
                 break;
             case DOWN:
-                g.drawImage(ResourcesManger.tankD, x, y, null);
+                g.drawImage(this.group == Group.Good ? ResourcesManger.goodTankD : ResourcesManger.badTankD, x, y,
+                        null);
                 break;
             case LEFT:
-                g.drawImage(ResourcesManger.tankL, x, y, null);
+                g.drawImage(this.group == Group.Good ? ResourcesManger.goodTankL : ResourcesManger.badTankL, x, y,
+                        null);
                 break;
             case RIGHT:
-                g.drawImage(ResourcesManger.tankR, x, y, null);
+                g.drawImage(this.group == Group.Good ? ResourcesManger.goodTankR : ResourcesManger.badTankR, x, y,
+                        null);
                 break;
             default:
                 break;
