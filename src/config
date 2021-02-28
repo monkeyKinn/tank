@@ -1,2 +1,5 @@
 #tank count initialization
 initEnemyTankCount=10
+#fireStrategy
+goodFS=com.jinshengcong.tank.FourDirFireStrategy
+badFS=com.jinshengcong.tank.DefaultFireStrategy

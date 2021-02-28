@@ -37,6 +37,8 @@ public class Bullet {
         rect.y = y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
+        // new出来子弹后把自己加到bulletlist里面去
+        tf.bulletList.add(this);
     }
 
     public Group getGroup() {

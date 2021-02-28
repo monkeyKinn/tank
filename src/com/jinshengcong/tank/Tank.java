@@ -11,7 +11,8 @@ import java.util.Random;
  * @email jinshengcong@163.com
  */
 public class Tank {
-    Rectangle rect = new Rectangle();;
+    Rectangle rect = new Rectangle();
+    ;
     private int x, y;
     // 初始方向
     private Dir dir = Dir.RIGHT;
@@ -28,11 +29,20 @@ public class Tank {
 
     private Random random = new Random();
 
+    FireStrategy fireStrategy;
     public static final int WIDTH = ResourcesManger.goodTankU.getWidth();
     public static final int HEIGHT = ResourcesManger.goodTankU.getHeight();
 
     public Group getGroup() {
         return group;
+    }
+
+    public TankFrame getTf() {
+        return tf;
+    }
+
+    public void setTf(TankFrame tf) {
+        this.tf = tf;
     }
 
     public void setGroup(Group group) {
@@ -186,9 +196,25 @@ public class Tank {
 
     // 开火
     public void fire() {
-        int bX = this.x + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
-        int bY = this.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
-        tf.bulletList.add(new Bullet(bX, bY, this.dir, this.tf, this.group));
+        String fSName;
+        if (this.getGroup() == Group.Good) {
+            fSName = (String) PropertyMgr.getValue("goodFS");
+            // 用反射  就把名字代表的类load到内存,用的是全路径名
+            try {
+                fireStrategy = (FireStrategy) Class.forName(fSName).getDeclaredConstructor().newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        } else {
+            fSName = (String) PropertyMgr.getValue("badFS");
+            try {
+                fireStrategy = (FireStrategy) Class.forName(fSName).newInstance();
+            } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        fireStrategy.fire(this);
     }
 
     public void die() {
