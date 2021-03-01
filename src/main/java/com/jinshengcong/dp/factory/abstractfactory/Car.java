@@ -1,4 +1,4 @@
-package com.jinshengcong.factory;
+package com.jinshengcong.dp.factory.abstractfactory;
 
 /**
  * description
@@ -7,9 +7,9 @@ package com.jinshengcong.factory;
  * @version v1.0
  * @email jinshengcong@163.com
  */
-public class Broom implements Moveable{
+public class Car extends AbstractVehicle{
     @Override
     public void go() {
-        System.out.println("扫帚在飞");
+        System.out.println("车在跑");
     }
 }

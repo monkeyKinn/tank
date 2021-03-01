@@ -1,4 +1,4 @@
-package com.jinshengcong.factory;
+package com.jinshengcong.dp.factory;
 
 /**
  * 交通工具的工厂 简单工厂

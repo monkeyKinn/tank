@@ -1,4 +1,4 @@
-package com.jinshengcong.strategy;
+package com.jinshengcong.dp.strategy;
 
 /**
  * 选择排序的算法

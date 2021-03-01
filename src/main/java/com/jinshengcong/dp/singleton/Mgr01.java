@@ -1,4 +1,4 @@
-package com.jinshengcong.singleton;
+package com.jinshengcong.dp.singleton;
 
 /**
  * 饿汉式

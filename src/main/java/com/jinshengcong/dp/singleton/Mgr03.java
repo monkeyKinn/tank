@@ -1,4 +1,4 @@
-package com.jinshengcong.singleton;
+package com.jinshengcong.dp.singleton;
 
 /**
  * 枚举单例 effective Java

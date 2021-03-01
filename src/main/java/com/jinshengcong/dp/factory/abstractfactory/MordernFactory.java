@@ -1,4 +1,4 @@
-package com.jinshengcong.factory.abstractfactory;
+package com.jinshengcong.dp.factory.abstractfactory;
 
 /**
  * description
@@ -7,19 +7,19 @@ package com.jinshengcong.factory.abstractfactory;
  * @version v1.0
  * @email jinshengcong@163.com
  */
-public class MagicFactory extends AbstractFactory{
+public class MordernFactory extends AbstractFactory{
     @Override
     AbstractFood createFood() {
-        return new MushRoom();
+        return new Bread();
     }
 
     @Override
     AbstractWeapon createWeapon() {
-        return new MagicStick();
+        return new AK47();
     }
 
     @Override
     AbstractVehicle createVehicle() {
-        return new Broom();
+        return new Car();
     }
 }

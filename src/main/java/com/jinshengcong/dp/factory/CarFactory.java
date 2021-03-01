@@ -1,4 +1,4 @@
-package com.jinshengcong.factory;
+package com.jinshengcong.dp.factory;
 
 /**
  * 汽车工厂,只生产汽车

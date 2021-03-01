@@ -1,4 +1,4 @@
-package com.jinshengcong.singleton;
+package com.jinshengcong.dp.singleton;
 
 /**
  * 懒汉式 刚开始不初始化,在get的时候初始化(先判断是否为空)

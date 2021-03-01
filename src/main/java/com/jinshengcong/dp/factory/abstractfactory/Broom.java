@@ -1,4 +1,4 @@
-package com.jinshengcong.factory.abstractfactory;
+package com.jinshengcong.dp.factory.abstractfactory;
 
 /**
  * description
