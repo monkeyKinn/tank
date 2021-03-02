@@ -19,7 +19,7 @@ public class T {
         int initEnemyTankCount = Integer.parseInt((String) PropertyMgr.getValue("initEnemyTankCount"));
         // 初始化敌方坦克
         for (int i = 0; i < initEnemyTankCount; i++) {
-            tf.enemyTanksList.add(new Tank(50 + i * 100, 200, Dir.DOWN, Group.BAD, tf));
+            tf.enemyTanksList.add(tf.gameFactory.createTank(50 + i * 100, 200, Dir.DOWN, Group.BAD, tf));
         }
         // 播放背景音乐
         // new Thread(()->new Audio("audio/war1.wav").loop()).start();

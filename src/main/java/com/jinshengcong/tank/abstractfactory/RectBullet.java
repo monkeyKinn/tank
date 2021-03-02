@@ -1,7 +1,6 @@
-package com.jinshengcong.tank;
+package com.jinshengcong.tank.abstractfactory;
 
-import com.jinshengcong.tank.abstractfactory.BaseBullet;
-import com.jinshengcong.tank.abstractfactory.BaseTank;
+import com.jinshengcong.tank.*;
 
 import java.awt.*;
 
@@ -12,7 +11,7 @@ import java.awt.*;
  * @version v1.0
  * @email jinshengcong@163.com
  */
-public class Bullet extends BaseBullet {
+public class RectBullet extends BaseBullet {
     // 速度
     private static final int SPEED = 20;
     // 大小
@@ -29,7 +28,7 @@ public class Bullet extends BaseBullet {
     private Group group = Group.BAD;
     Rectangle rect = new Rectangle();
 
-    public Bullet(int x, int y, Dir dir, TankFrame tf, Group group) {
+    public RectBullet(int x, int y, Dir dir, TankFrame tf, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -60,6 +59,11 @@ public class Bullet extends BaseBullet {
         this.dir = dir;
     }
 
+    @Override
+    public void collideWith(BaseTank tank) {
+
+    }
+
     public void paint(Graphics g) {
         // 再画子弹时候判断子弹存活情况
         if (!live) {
@@ -67,22 +71,10 @@ public class Bullet extends BaseBullet {
             tf.bulletList.remove(this);
         }
         // 画一个子弹
-        switch (dir) {
-            case UP:
-                g.drawImage(ResourcesManger.bulletU, x, y, null);
-                break;
-            case DOWN:
-                g.drawImage(ResourcesManger.bulletD, x, y, null);
-                break;
-            case LEFT:
-                g.drawImage(ResourcesManger.bulletL, x, y, null);
-                break;
-            case RIGHT:
-                g.drawImage(ResourcesManger.bulletR, x, y, null);
-                break;
-            default:
-                break;
-        }
+        Color color = g.getColor();
+        g.setColor(Color.RED);
+        g.fillRect(x,y, 20, 20);
+        g.setColor(color);
         move();
     }
 
@@ -123,7 +115,7 @@ public class Bullet extends BaseBullet {
      * @version v1.0
      * @date 2021/02/27 0:09
      */
-    public void collideWith(BaseTank tank) {
+    public void collideWith(Tank tank) {
         // 队友伤害忽略
         if (this.group == tank.getGroup()) return;
 

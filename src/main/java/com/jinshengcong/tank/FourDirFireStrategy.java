@@ -1,5 +1,7 @@
 package com.jinshengcong.tank;
 
+import com.jinshengcong.tank.abstractfactory.BaseTank;
+
 /**
  * description
  *
@@ -15,7 +17,8 @@ public class FourDirFireStrategy implements FireStrategy {
         //得到枚举的所有值
         Dir[] dirs = Dir.values();
         for (Dir dir : dirs) {
-            new Bullet(bX, bY, dir, t.getTf(), t.getGroup());
+            // new Bullet(bX, bY, dir, t.getTf(), t.getGroup());
+            t.getTf().gameFactory.createBullet(bX, bY, dir, t.getTf(), t.getGroup());
         }
 
         if (t.getGroup() == Group.Good) {

@@ -1,5 +1,7 @@
 package com.jinshengcong.tank;
 
+import com.jinshengcong.tank.abstractfactory.BaseTank;
+
 /**
  * description
  *

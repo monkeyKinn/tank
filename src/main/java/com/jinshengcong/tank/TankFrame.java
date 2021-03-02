@@ -1,5 +1,7 @@
 package com.jinshengcong.tank;
 
+import com.jinshengcong.tank.abstractfactory.*;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -13,11 +15,13 @@ import java.util.List;
  * @email jinshengcong@163.com
  */
 public class TankFrame extends Frame {
-    static final int GAME_WIDTH = 1080, GAME_HEIGHT = 960;
     Tank myTank = new Tank(200, 500, Dir.DOWN, Group.Good, this);
-    List<Bullet> bulletList = new ArrayList<>();
-    List<Tank> enemyTanksList = new ArrayList<>();
-    List<Explode> explodeList = new ArrayList<>();
+    public List<BaseBullet> bulletList = new ArrayList<>();
+    public List<BaseTank> enemyTanksList = new ArrayList<>();
+    public List<BaseExploded> explodeList = new ArrayList<>();
+
+    public static final int GAME_WIDTH = 1080, GAME_HEIGHT = 960;
+    public GameFactory gameFactory = new DefaultFactory();
 
     public TankFrame() {
         this.setTitle("Tank War");

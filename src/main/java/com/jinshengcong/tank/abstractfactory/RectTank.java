@@ -1,6 +1,6 @@
-package com.jinshengcong.tank;
+package com.jinshengcong.tank.abstractfactory;
 
-import com.jinshengcong.tank.abstractfactory.BaseTank;
+import com.jinshengcong.tank.*;
 
 import java.awt.*;
 import java.util.Random;
@@ -12,8 +12,8 @@ import java.util.Random;
  * @version v1.0
  * @email jinshengcong@163.com
  */
-public class Tank extends BaseTank {
-
+public class RectTank extends BaseTank {
+    public Rectangle rect = new Rectangle();
     private int x, y;
     // 初始方向
     private Dir dir = Dir.RIGHT;
@@ -26,7 +26,7 @@ public class Tank extends BaseTank {
     //生死状态
     private boolean live = true;
 
-    // private Group group = Group.BAD;
+    private Group group = Group.BAD;
 
     private Random random = new Random();
 
@@ -34,6 +34,9 @@ public class Tank extends BaseTank {
     public static final int WIDTH = ResourcesManger.goodTankU.getWidth();
     public static final int HEIGHT = ResourcesManger.goodTankU.getHeight();
 
+    public Group getGroup() {
+        return group;
+    }
 
     public TankFrame getTf() {
         return tf;
@@ -43,6 +46,9 @@ public class Tank extends BaseTank {
         this.tf = tf;
     }
 
+    public void setGroup(Group group) {
+        this.group = group;
+    }
 
     public boolean isMoving() {
         return moving;
@@ -68,7 +74,7 @@ public class Tank extends BaseTank {
         this.y = y;
     }
 
-    public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
+    public RectTank(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -93,26 +99,31 @@ public class Tank extends BaseTank {
         if (!live) {
             tf.enemyTanksList.remove(this);
         }
-        switch (dir) {
-            case UP:
-                g.drawImage(super.getGroup() == Group.Good ? ResourcesManger.goodTankU : ResourcesManger.badTankU, x, y,
-                        null);
-                break;
-            case DOWN:
-                g.drawImage(super.getGroup() == Group.Good ? ResourcesManger.goodTankD : ResourcesManger.badTankD, x, y,
-                        null);
-                break;
-            case LEFT:
-                g.drawImage(super.getGroup() == Group.Good ? ResourcesManger.goodTankL : ResourcesManger.badTankL, x, y,
-                        null);
-                break;
-            case RIGHT:
-                g.drawImage(super.getGroup() == Group.Good ? ResourcesManger.goodTankR : ResourcesManger.badTankR, x, y,
-                        null);
-                break;
-            default:
-                break;
-        }
+        // switch (dir) {
+        //     case UP:
+        //         g.drawImage(this.group == Group.Good ? ResourcesManger.goodTankU : ResourcesManger.badTankU, x, y,
+        //                 null);
+        //         break;
+        //     case DOWN:
+        //         g.drawImage(this.group == Group.Good ? ResourcesManger.goodTankD : ResourcesManger.badTankD, x, y,
+        //                 null);
+        //         break;
+        //     case LEFT:
+        //         g.drawImage(this.group == Group.Good ? ResourcesManger.goodTankL : ResourcesManger.badTankL, x, y,
+        //                 null);
+        //         break;
+        //     case RIGHT:
+        //         g.drawImage(this.group == Group.Good ? ResourcesManger.goodTankR : ResourcesManger.badTankR, x, y,
+        //                 null);
+        //         break;
+        //     default:
+        //         break;
+        // }
+        Color color = g.getColor();
+        g.setColor(group==Group.Good?Color.RED:Color.BLUE);
+
+        g.fillRect(x, y, 40, 40);
+        g.setColor(color);
         move();
     }
 
@@ -168,11 +179,11 @@ public class Tank extends BaseTank {
         if (this.y < 102) {
             y = 102;
         }
-        if (this.x > TankFrame.GAME_WIDTH - Tank.WIDTH - 2) {
-            x = TankFrame.GAME_WIDTH - Tank.WIDTH - 2;
+        if (this.x > TankFrame.GAME_WIDTH - RectTank.WIDTH - 2) {
+            x = TankFrame.GAME_WIDTH - RectTank.WIDTH - 2;
         }
-        if (this.y > TankFrame.GAME_HEIGHT - Tank.HEIGHT - 2) {
-            y = TankFrame.GAME_HEIGHT - Tank.HEIGHT - 2;
+        if (this.y > TankFrame.GAME_HEIGHT - RectTank.HEIGHT - 2) {
+            y = TankFrame.GAME_HEIGHT - RectTank.HEIGHT - 2;
         }
     }
 
@@ -210,8 +221,8 @@ public class Tank extends BaseTank {
             }
         }
         // fireStrategy.fire(this);
-        int bX = this.getX() + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
-        int bY = this.getY() + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
+        int bX = this.getX() + RectTank.WIDTH / 2 - Bullet.WIDTH / 2;
+        int bY = this.getY() + RectTank.HEIGHT / 2 - Bullet.HEIGHT / 2;
         //得到枚举的所有值
         Dir[] dirs = Dir.values();
         for (Dir dir : dirs) {
