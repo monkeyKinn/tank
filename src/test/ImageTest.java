@@ -1,3 +1,5 @@
+package test;
+
 import com.jinshengcong.tank.PropertyMgr;
 import org.junit.Assert;
 import org.junit.Test;
