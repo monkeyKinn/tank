@@ -14,7 +14,6 @@ import java.util.Random;
  */
 public class Tank extends GameObject{
     public Rectangle rect = new Rectangle();
-    private int x, y;
     private int oldX, oldY;
     // 初始方向
     private Dir dir = Dir.RIGHT;
@@ -228,5 +227,14 @@ public class Tank extends GameObject{
     }
     public void stop(){
         this.moving = false;
+    }
+    @Override
+    public int getWidth() {
+        return WIDTH;
+    }
+
+    @Override
+    public int getHeight() {
+        return HEIGHT;
     }
 }

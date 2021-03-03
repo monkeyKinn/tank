@@ -15,8 +15,6 @@ public class Bullet  extends GameObject{
     // 大小
     public static final int WIDTH = ResourcesManger.bulletL.getWidth();
     public static final int HEIGHT = ResourcesManger.bulletL.getHeight();
-    // 坐标
-    private int x, y;
     // 方向
     private Dir dir;
     // 活着的状态
@@ -79,6 +77,16 @@ public class Bullet  extends GameObject{
                 break;
         }
         move();
+    }
+
+    @Override
+    public int getWidth() {
+        return WIDTH;
+    }
+
+    @Override
+    public int getHeight() {
+        return HEIGHT;
     }
 
     private void move() {

@@ -1,9 +1,7 @@
 package com.jinshengcong.tank.strategy.impl;
 
-import com.jinshengcong.tank.Audio;
-import com.jinshengcong.tank.Bullet;
-import com.jinshengcong.tank.Group;
-import com.jinshengcong.tank.Tank;
+import com.jinshengcong.tank.*;
+import com.jinshengcong.tank.decorator.RectDecorator;
 import com.jinshengcong.tank.strategy.FireStrategy;
 
 /**
@@ -19,7 +17,7 @@ public class DefaultFireStrategy implements FireStrategy {
     public void fire(Tank t) {
         int bX = t.getX() + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
         int bY = t.getY() + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
-        new Bullet(bX, bY, t.getDir(), t.getGroup());
+        GameModel.getInstance().add(new RectDecorator(new Bullet(bX, bY, t.getDir(), t.getGroup())));
         if (t.getGroup() == Group.Good){
             new Thread(()->new Audio("audio/tank_fire.wav").play()).start();
         }
