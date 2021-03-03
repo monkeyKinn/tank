@@ -21,7 +21,8 @@ public class TankTankCollider implements Collider {
             Tank tank1 = (Tank) gameObject1;
             Tank tank2 = (Tank) gameObject2;
             if (tank1.getRect().intersects(tank2.getRect())) {
-                tank1.stop();
+                tank1.back();
+                tank2.back();
             }
         }
         return true;

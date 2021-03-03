@@ -16,6 +16,7 @@ public class Tank extends GameObject{
     Rectangle rect = new Rectangle();
     public GameModel gm ;
     private int x, y;
+    private int oldX, oldY;
     // 初始方向
     private Dir dir = Dir.RIGHT;
     // 速度
@@ -120,8 +121,15 @@ public class Tank extends GameObject{
         }
         move();
     }
-
+    // 撞后返回
+    public void back(){
+        x=oldX;
+        y = oldY;
+    }
     private void move() {
+        // 记录移动之前的位置
+        oldX = x;
+        oldY = y;
         // 没有移动
         if (!moving) return;
 
