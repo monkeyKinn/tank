@@ -16,21 +16,21 @@ public class Explode {
     // 坐标
     private int x, y;
     // 活着的状态
-    private TankFrame tf = null;
+    private GameModel gm = null;
     // 爆炸图片的数组下标
     private int step = 0;
 
-    public Explode(int x, int y, TankFrame tf) {
+    public Explode(int x, int y, GameModel gm) {
         this.x = x;
         this.y = y;
-        this.tf = tf;
+        this.gm = gm;
         // new Audio("audio/explode.wav").play();
     }
 
     public void paint(Graphics g) {
         g.drawImage(ResourcesManger.explodes[step++], x, y, null);
         if (step >= ResourcesManger.explodes.length) {
-            tf.explodeList.remove(this);
+            gm.explodeList.remove(this);
         }
     }
 }

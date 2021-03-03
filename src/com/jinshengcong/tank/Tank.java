@@ -12,7 +12,7 @@ import java.util.Random;
  */
 public class Tank {
     Rectangle rect = new Rectangle();
-    ;
+    ;GameModel gm ;
     private int x, y;
     // 初始方向
     private Dir dir = Dir.RIGHT;
@@ -20,8 +20,6 @@ public class Tank {
     private final static int SPEED = 10;
     // 停止
     private boolean moving = true;
-    // tankFrame对象
-    private TankFrame tf = null;
     //生死状态
     private boolean live = true;
 
@@ -35,14 +33,6 @@ public class Tank {
 
     public Group getGroup() {
         return group;
-    }
-
-    public TankFrame getTf() {
-        return tf;
-    }
-
-    public void setTf(TankFrame tf) {
-        this.tf = tf;
     }
 
     public void setGroup(Group group) {
@@ -73,11 +63,11 @@ public class Tank {
         this.y = y;
     }
 
-    public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
+    public Tank(int x, int y, Dir dir, Group group, GameModel gm) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.tf = tf;
+        this.gm = gm;
         this.group = group;
 
         this.rect.x = x;
@@ -96,7 +86,7 @@ public class Tank {
 
     public void paint(Graphics g) {
         if (!live) {
-            tf.enemyTanksList.remove(this);
+            gm.enemyTanksList.remove(this);
         }
         switch (dir) {
             case UP:

@@ -13,11 +13,11 @@ import java.util.List;
  * @email jinshengcong@163.com
  */
 public class TankFrame extends Frame {
+    GameModel gm = new GameModel();
+
     static final int GAME_WIDTH = 1080, GAME_HEIGHT = 960;
-    Tank myTank = new Tank(200, 500, Dir.DOWN, Group.Good, this);
-    List<Bullet> bulletList = new ArrayList<>();
-    List<Tank> enemyTanksList = new ArrayList<>();
-    List<Explode> explodeList = new ArrayList<>();
+
+
 
     public TankFrame() {
         this.setTitle("Tank War");
@@ -93,32 +93,10 @@ public class TankFrame extends Frame {
      */
     @Override
     public void paint(Graphics g) {
-        Color c = g.getColor();
-        g.setColor(Color.CYAN);
-        g.drawString("子弹数量: " + bulletList.size(), 10, 60);
-        g.drawString("敌方坦克数量: " + enemyTanksList.size(), 10, 80);
-        g.drawString("爆炸数量: " + explodeList.size(), 10, 100);
-        g.setColor(c);
+        // 把gm画出来
+        gm.paint(g);
 
-        // 画我的坦克
-        myTank.paint(g);
-        for (int i = 0; i < bulletList.size(); i++) {
-            bulletList.get(i).paint(g);
-        }
-        // 画敌方坦克
-        for (int i = 0; i < enemyTanksList.size(); i++) {
-            enemyTanksList.get(i).paint(g);
-        }
-        // 画爆炸
-        for (int i = 0; i < explodeList.size(); i++) {
-            explodeList.get(i).paint(g);
-        }
-        // 碰撞
-        for (int i = 0; i < bulletList.size(); i++) {
-            for (int j = 0; j < enemyTanksList.size(); j++) {
-                bulletList.get(i).collideWith(enemyTanksList.get(j));
-            }
-        }
+
     }
 
     private class MyKeyListener extends KeyAdapter {
@@ -171,7 +149,7 @@ public class TankFrame extends Frame {
                     break;
                 case KeyEvent.VK_CONTROL:
                     // 打子弹
-                    myTank.fire();
+                    gm.getMyTank().fire();
                     break;
                 default:
                     break;
@@ -180,6 +158,7 @@ public class TankFrame extends Frame {
         }
 
         private void setMainTankDir() {
+            Tank myTank = gm.getMyTank();
             // 什么都没按的时候静止
             if (!bU && !bD && !bL && !bR) {
                 myTank.setMoving(false);

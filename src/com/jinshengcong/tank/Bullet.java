@@ -21,16 +21,16 @@ public class Bullet {
     private Dir dir;
     // 活着的状态
     private boolean live = true;
-    private TankFrame tf = null;
+    private GameModel gm = null;
 
     private Group group = Group.BAD;
     Rectangle rect = new Rectangle();
 
-    public Bullet(int x, int y, Dir dir, TankFrame tf, Group group) {
+    public Bullet(int x, int y, Dir dir, GameModel gm, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.tf = tf;
+        this.gm = gm;
         this.group = group;
 
         rect.x = x;
@@ -38,7 +38,7 @@ public class Bullet {
         rect.width = WIDTH;
         rect.height = HEIGHT;
         // new出来子弹后把自己加到bulletlist里面去
-        tf.bulletList.add(this);
+        gm.bulletList.add(this);
     }
 
     public Group getGroup() {
@@ -61,7 +61,7 @@ public class Bullet {
         // 再画子弹时候判断子弹存活情况
         if (!live) {
             // 消除子弹
-            tf.bulletList.remove(this);
+            gm.bulletList.remove(this);
         }
         // 画一个子弹
         switch (dir) {
@@ -132,7 +132,7 @@ public class Bullet {
             int eX = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
             int eY = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
 
-            tf.explodeList.add(new Explode(eX, eY, tf));
+            gm.explodeList.add(new Explode(eX, eY, gm));
         }
     }
 
