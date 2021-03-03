@@ -17,8 +17,6 @@ public class TankFrame extends Frame {
 
     static final int GAME_WIDTH = 1080, GAME_HEIGHT = 960;
 
-
-
     public TankFrame() {
         this.setTitle("Tank War");
         this.setSize(GAME_WIDTH, GAME_HEIGHT);

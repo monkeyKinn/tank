@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 实体类大管家
+ * 实体类大管家 facade 负责与frame 打交道 同时负责内部事务
  *
  * @author 金聖聰
  * @version v1.0
@@ -13,8 +13,8 @@ import java.util.List;
  */
 public class GameModel {
 
-    java.util.List<Bullet> bulletList = new ArrayList<>();
-    java.util.List<Tank> enemyTanksList = new ArrayList<>();
+    List<Bullet> bulletList = new ArrayList<>();
+    List<Tank> enemyTanksList = new ArrayList<>();
     List<Explode> explodeList = new ArrayList<>();
 
     Tank myTank = new Tank(200, 500, Dir.DOWN, Group.Good, this);
