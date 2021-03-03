@@ -2,7 +2,9 @@ package com.jinshengcong.tank.chainofresponsibility;
 
 import com.jinshengcong.tank.GameObject;
 import com.jinshengcong.tank.chainofresponsibility.impl.BulletTankCollider;
+import com.jinshengcong.tank.chainofresponsibility.impl.BulletWallCollider;
 import com.jinshengcong.tank.chainofresponsibility.impl.TankTankCollider;
+import com.jinshengcong.tank.chainofresponsibility.impl.TankWallCollider;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -20,6 +22,8 @@ public class ColliderChain implements Collider {
     public ColliderChain() {
         add(new BulletTankCollider());
         add(new TankTankCollider());
+        add(new BulletWallCollider());
+        add(new TankWallCollider());
     }
 
     public void add(Collider collider) {

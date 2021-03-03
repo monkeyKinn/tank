@@ -18,7 +18,7 @@ public class FourDirFireStrategy implements FireStrategy {
         //得到枚举的所有值
         Dir[] dirs = Dir.values();
         for (Dir dir : dirs) {
-            new Bullet(bX, bY, dir, t.gm, t.getGroup());
+            new Bullet(bX, bY, dir, t.getGroup());
         }
 
         if (t.getGroup() == Group.Good) {

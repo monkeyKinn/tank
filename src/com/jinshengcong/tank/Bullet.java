@@ -21,16 +21,14 @@ public class Bullet  extends GameObject{
     private Dir dir;
     // 活着的状态
     private boolean live = true;
-    private GameModel gm = null;
 
     private Group group = Group.BAD;
-    Rectangle rect = new Rectangle();
+    public Rectangle rect = new Rectangle();
 
-    public Bullet(int x, int y, Dir dir, GameModel gm, Group group) {
+    public Bullet(int x, int y, Dir dir, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.gm = gm;
         this.group = group;
 
         rect.x = x;
@@ -38,7 +36,7 @@ public class Bullet  extends GameObject{
         rect.width = WIDTH;
         rect.height = HEIGHT;
         // new出来子弹后把自己加到bulletlist里面去
-        gm.add(this);
+        GameModel.getInstance().add(this);
     }
 
     public Group getGroup() {
@@ -61,7 +59,7 @@ public class Bullet  extends GameObject{
         // 再画子弹时候判断子弹存活情况
         if (!live) {
             // 消除子弹
-            gm.remove(this);
+            GameModel.getInstance().remove(this);
         }
         // 画一个子弹
         switch (dir) {
@@ -110,35 +108,9 @@ public class Bullet  extends GameObject{
         }
     }
 
-    /**
-     * 撞击
-     *
-     * @param tank
-     * @return void
-     * @author 金聖聰
-     * @email jinshengcong@163.com
-     * @version v1.0
-     * @date 2021/02/27 0:09
-     */
-    public boolean collideWith(Tank tank) {
-        // 队友伤害忽略
-        if (this.group == tank.getGroup()) return false;
 
-        // 用一个rec来记录子弹的位置
-        // 子弹本身的矩形与坦克的矩形相交
-        if (rect.intersects(tank.rect)) {//相交
-            tank.die();
-            this.die();
-            int eX = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
-            int eY = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
-            // 添加一个爆炸
-            gm.add(new Explode(eX, eY, gm));
-            return true;
-        }
-        return false;
-    }
 
-    private void die() {
+    public void die() {
         this.live = false;
     }
 }

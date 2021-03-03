@@ -17,28 +17,34 @@ import java.util.List;
  * @email jinshengcong@163.com
  */
 public class GameModel {
+    private static final GameModel INSTANCE = new GameModel();
+    Tank myTank = new Tank(200, 500, Dir.DOWN, Group.Good);
+    ColliderChain chain = new ColliderChain();
+
     private List<GameObject> gameObjects = new ArrayList<>();
 
-    // Collider collider = new BulletTankCollider();
-    // Collider tankCo = new TankTankCollider();
-   ColliderChain chain = new ColliderChain();
-
-    Tank myTank = new Tank(200, 500, Dir.DOWN, Group.Good, this);
-
-    public void add(GameObject gameObject){
+    public void add(GameObject gameObject) {
         this.gameObjects.add(gameObject);
     }
-    public void remove(GameObject gameObject){
+
+    public void remove(GameObject gameObject) {
         this.gameObjects.remove(gameObject);
     }
-
-    public GameModel() {
+    public static GameModel getInstance(){
+        return INSTANCE;
+    }
+    private GameModel() {
         int initEnemyTankCount = Integer.parseInt((String) PropertyMgr.getValue("initEnemyTankCount"));
         // 初始化敌方坦克
         for (int i = 0; i < initEnemyTankCount; i++) {
-            this.add(new Tank(50 + i * 100, 200, Dir.DOWN, Group.BAD, this));
+            this.add(new Tank(50 + i * 100, 200, Dir.DOWN, Group.BAD));
         }
 
+        // 初始化墙
+        this.add(new Wall(150, 150, 200, 50));
+        this.add(new Wall(550, 150, 200, 50));
+        this.add(new Wall(300, 300, 50, 250));
+        this.add(new Wall(550, 300, 50, 550));
     }
 
     public void paint(Graphics g) {
@@ -57,10 +63,10 @@ public class GameModel {
 
         // 碰撞
         for (int i = 0; i < gameObjects.size(); i++) {
-            for (int j = i+1; j < gameObjects.size(); j++) {
+            for (int j = i + 1; j < gameObjects.size(); j++) {
                 GameObject gameObject1 = gameObjects.get(i);
                 GameObject gameObject2 = gameObjects.get(j);
-                chain.collideWith(gameObject1,gameObject2);
+                chain.collideWith(gameObject1, gameObject2);
             }
         }
         // for (int i = 0; i < bulletList.size(); i++) {

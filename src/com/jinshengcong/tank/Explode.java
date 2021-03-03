@@ -15,22 +15,19 @@ public class Explode  extends GameObject{
     public static final int HEIGHT = ResourcesManger.explodes[0].getHeight();
     // 坐标
     private int x, y;
-    // 活着的状态
-    private GameModel gm = null;
     // 爆炸图片的数组下标
     private int step = 0;
 
-    public Explode(int x, int y, GameModel gm) {
+    public Explode(int x, int y) {
         this.x = x;
         this.y = y;
-        this.gm = gm;
         // new Audio("audio/explode.wav").play();
     }
 
     public void paint(Graphics g) {
         g.drawImage(ResourcesManger.explodes[step++], x, y, null);
         if (step >= ResourcesManger.explodes.length) {
-            gm.remove(this);
+            GameModel.getInstance().remove(this);
         }
     }
 }

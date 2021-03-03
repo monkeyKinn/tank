@@ -13,8 +13,7 @@ import java.util.Random;
  * @email jinshengcong@163.com
  */
 public class Tank extends GameObject{
-    Rectangle rect = new Rectangle();
-    public GameModel gm ;
+    public Rectangle rect = new Rectangle();
     private int x, y;
     private int oldX, oldY;
     // 初始方向
@@ -74,11 +73,10 @@ public class Tank extends GameObject{
         this.y = y;
     }
 
-    public Tank(int x, int y, Dir dir, Group group, GameModel gm) {
+    public Tank(int x, int y, Dir dir, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.gm = gm;
         this.group = group;
 
         this.rect.x = x;
@@ -97,7 +95,7 @@ public class Tank extends GameObject{
 
     public void paint(Graphics g) {
         if (!live) {
-            gm.remove(this);
+            GameModel.getInstance().remove(this);
         }
         switch (dir) {
             case UP:
