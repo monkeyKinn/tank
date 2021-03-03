@@ -1,4 +1,10 @@
-package com.jinshengcong.tank;
+package com.jinshengcong.tank.strategy.impl;
+
+import com.jinshengcong.tank.Audio;
+import com.jinshengcong.tank.Bullet;
+import com.jinshengcong.tank.Group;
+import com.jinshengcong.tank.Tank;
+import com.jinshengcong.tank.strategy.FireStrategy;
 
 /**
  * description
@@ -7,7 +13,7 @@ package com.jinshengcong.tank;
  * @version v1.0
  * @email jinshengcong@163.com
  */
-public class DefaultFireStrategy implements FireStrategy{
+public class DefaultFireStrategy implements FireStrategy {
 
     @Override
     public void fire(Tank t) {

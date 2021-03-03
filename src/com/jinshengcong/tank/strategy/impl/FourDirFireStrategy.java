@@ -1,4 +1,7 @@
-package com.jinshengcong.tank;
+package com.jinshengcong.tank.strategy.impl;
+
+import com.jinshengcong.tank.*;
+import com.jinshengcong.tank.strategy.FireStrategy;
 
 /**
  * description

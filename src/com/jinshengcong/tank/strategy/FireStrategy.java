@@ -1,4 +1,6 @@
-package com.jinshengcong.tank;
+package com.jinshengcong.tank.strategy;
+
+import com.jinshengcong.tank.Tank;
 
 /**
  * 开火的策略

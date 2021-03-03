@@ -9,7 +9,7 @@ import java.awt.*;
  * @version v1.0
  * @email jinshengcong@163.com
  */
-public class Bullet {
+public class Bullet  extends GameObject{
     // 速度
     private static final int SPEED = 20;
     // 大小
@@ -38,7 +38,7 @@ public class Bullet {
         rect.width = WIDTH;
         rect.height = HEIGHT;
         // new出来子弹后把自己加到bulletlist里面去
-        gm.bulletList.add(this);
+        gm.add(this);
     }
 
     public Group getGroup() {
@@ -61,7 +61,7 @@ public class Bullet {
         // 再画子弹时候判断子弹存活情况
         if (!live) {
             // 消除子弹
-            gm.bulletList.remove(this);
+            gm.remove(this);
         }
         // 画一个子弹
         switch (dir) {
@@ -120,9 +120,9 @@ public class Bullet {
      * @version v1.0
      * @date 2021/02/27 0:09
      */
-    public void collideWith(Tank tank) {
+    public boolean collideWith(Tank tank) {
         // 队友伤害忽略
-        if (this.group == tank.getGroup()) return;
+        if (this.group == tank.getGroup()) return false;
 
         // 用一个rec来记录子弹的位置
         // 子弹本身的矩形与坦克的矩形相交
@@ -131,9 +131,11 @@ public class Bullet {
             this.die();
             int eX = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
             int eY = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
-
-            gm.explodeList.add(new Explode(eX, eY, gm));
+            // 添加一个爆炸
+            gm.add(new Explode(eX, eY, gm));
+            return true;
         }
+        return false;
     }
 
     private void die() {

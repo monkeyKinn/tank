@@ -1,5 +1,7 @@
 package com.jinshengcong.tank;
 
+import com.jinshengcong.tank.strategy.FireStrategy;
+
 import java.awt.*;
 import java.util.Random;
 
@@ -10,9 +12,9 @@ import java.util.Random;
  * @version v1.0
  * @email jinshengcong@163.com
  */
-public class Tank {
+public class Tank extends GameObject{
     Rectangle rect = new Rectangle();
-    ;GameModel gm ;
+    public GameModel gm ;
     private int x, y;
     // 初始方向
     private Dir dir = Dir.RIGHT;
@@ -27,9 +29,17 @@ public class Tank {
 
     private Random random = new Random();
 
-    FireStrategy fireStrategy;
+    public FireStrategy fireStrategy;
     public static final int WIDTH = ResourcesManger.goodTankU.getWidth();
     public static final int HEIGHT = ResourcesManger.goodTankU.getHeight();
+
+    public Rectangle getRect() {
+        return rect;
+    }
+
+    public void setRect(Rectangle rect) {
+        this.rect = rect;
+    }
 
     public Group getGroup() {
         return group;
@@ -86,7 +96,7 @@ public class Tank {
 
     public void paint(Graphics g) {
         if (!live) {
-            gm.enemyTanksList.remove(this);
+            gm.remove(this);
         }
         switch (dir) {
             case UP:
@@ -209,5 +219,8 @@ public class Tank {
 
     public void die() {
         this.live = false;
+    }
+    public void stop(){
+        this.moving = false;
     }
 }
