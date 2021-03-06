@@ -1,9 +1,6 @@
 package com.jinshengcong.tank;
 
-import com.jinshengcong.tank.chainofresponsibility.Collider;
 import com.jinshengcong.tank.chainofresponsibility.ColliderChain;
-import com.jinshengcong.tank.chainofresponsibility.impl.BulletTankCollider;
-import com.jinshengcong.tank.chainofresponsibility.impl.TankTankCollider;
 
 import java.awt.*;
 import java.util.ArrayList;

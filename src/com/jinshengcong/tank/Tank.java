@@ -3,6 +3,8 @@ package com.jinshengcong.tank;
 import com.jinshengcong.tank.strategy.FireStrategy;
 
 import java.awt.*;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -236,5 +238,23 @@ public class Tank extends GameObject{
     @Override
     public int getHeight() {
         return HEIGHT;
+    }
+    private List<TankFireObserver> fireObservers = Arrays.asList(new TankFireHandle());
+    /**
+     * 按下ctrl键后该怎么做  发出这个事件 然后循环调用每个Observer
+     *
+     * @return void
+     * @author 金聖聰
+     * @email jinshengcong@163.com
+     * @version v1.0
+     * @date 2021/03/06 16:21
+     */
+    public void handleFireKey() {
+        // 新建一个tank开火事件
+        TankFireEvent event = new TankFireEvent(this);
+        for (TankFireObserver fireObserver : fireObservers) {
+            // 观察者开火
+            fireObserver.actionOnFire(event);
+        }
     }
 }

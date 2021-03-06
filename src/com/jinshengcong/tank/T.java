@@ -1,11 +1,5 @@
 package com.jinshengcong.tank;
 
-import com.sun.deploy.util.StringUtils;
-
-import java.awt.*;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-
 /**
  * description
  *
